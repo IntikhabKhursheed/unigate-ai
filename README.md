@@ -7,16 +7,16 @@ It helps students discover universities with open admissions, deadlines, fee req
 
 - `scraper/`: Python scraper that collects raw admission page content
 - `extraction/`: Python module that turns raw content into structured JSON with Gemini
-- `backend/`: Node.js + Express API with MongoDB
-- `frontend/`: React + Vite + Tailwind UI
+- `server/`: Node.js + Express API with MongoDB
+- `client/`: React + Vite + Tailwind UI
 - `data/`: Shared raw and processed data outputs
 
 ## Architecture
 
 ```text
 Student
-  -> Frontend (React + Vite + Tailwind)
-    -> Backend API (Express + MongoDB)
+  -> Client (React + Vite + Tailwind)
+    -> Server API (Express + MongoDB)
       -> Processed admissions data
         -> Extraction (Python + Gemini)
           -> Raw scraped pages
@@ -44,17 +44,17 @@ Student
 
 ## Setup
 
-### 1. Install backend dependencies
+### 1. Install server dependencies
 
 ```bash
-cd backend
+cd server
 npm install
 ```
 
-### 2. Install frontend dependencies
+### 2. Install client dependencies
 
 ```bash
-cd frontend
+cd client
 npm install
 ```
 
@@ -82,8 +82,8 @@ Copy `.env.example` to `.env` and fill in your values.
 
 1. The scraper fetches admission pages and stores raw HTML/text in `data/raw/`
 2. The extraction module reads raw files and generates clean JSON in `data/processed/`
-3. The backend reads processed data, stores it in MongoDB, and serves API endpoints
-4. The frontend queries the backend and presents search, compare, and recommendation views
+3. The server reads processed data, stores it in MongoDB, and serves API endpoints
+4. The client queries the server and presents search, compare, and recommendation views
 
 ## Current status
 

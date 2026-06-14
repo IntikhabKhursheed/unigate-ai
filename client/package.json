@@ -1,9 +1,9 @@
 {
-  "name": "unigate-frontend",
+  "name": "unigate-client",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "React frontend for UniGate",
+  "description": "React client for UniGate",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

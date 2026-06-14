@@ -1,5 +1,5 @@
 {
-  "name": "unigate-backend",
+  "name": "unigate-server",
   "version": "0.1.0",
   "private": true,
   "description": "Express API for UniGate admissions intelligence platform",

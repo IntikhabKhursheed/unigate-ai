@@ -18,7 +18,7 @@ app.use(express.json());
 // Health check so we can verify the API boots successfully.
 app.get("/", (req, res) => {
   res.json({
-    message: "UniGate backend is running",
+    message: "UniGate server is running",
     status: "ok",
   });
 });

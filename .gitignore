@@ -1,8 +1,12 @@
 # Node.js
-node_modules/
-dist/
-build/
-coverage/
+server/node_modules/
+server/dist/
+server/build/
+server/coverage/
+client/node_modules/
+client/dist/
+client/build/
+client/coverage/
 
 # Python
 __pycache__/
