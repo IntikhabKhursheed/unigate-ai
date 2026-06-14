@@ -63,6 +63,7 @@ npm install
 ```bash
 cd scraper
 pip install -r requirements.txt
+playwright install chromium
 
 cd ../extraction
 pip install -r requirements.txt
