@@ -3,7 +3,7 @@
     "id": "fast-nu-cs",
     "name": "FAST National University",
     "country": "Pakistan",
-    "admission_page_url": "https://www.nu.edu.pk/Admissions",
+    "admission_page_url": "https://www.nu.edu.pk/Admission/Schedule",
     "program_level": "Masters",
     "field": "Computer Science"
   },
@@ -11,7 +11,7 @@
     "id": "nust-cs",
     "name": "NUST",
     "country": "Pakistan",
-    "admission_page_url": "https://nust.edu.pk/admissions/",
+    "admission_page_url": "https://admissions.nust.edu.pk/",
     "program_level": "Masters",
     "field": "Computer Science"
   },
@@ -19,15 +19,16 @@
     "id": "metu-cs",
     "name": "Middle East Technical University",
     "country": "Turkey",
-    "admission_page_url": "https://international.metu.edu.tr/graduate-admissions",
+    "admission_page_url": "https://oibs2.metu.edu.tr/Eng/login.aspx",
     "program_level": "Masters",
-    "field": "Computer Science"
+    "field": "Computer Science",
+    "manual_check_needed": true
   },
   {
     "id": "tu-berlin-cs",
     "name": "Technical University of Berlin",
     "country": "Germany",
-    "admission_page_url": "https://www.tu.berlin/en/studying/degree-programmes/application-admission",
+    "admission_page_url": "https://www.tu.berlin/en/studying/prospective-students/degree-programmes",
     "program_level": "Masters",
     "field": "Computer Science"
   },

@@ -11,11 +11,12 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import random
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from playwright.sync_api import sync_playwright
 
 try:
@@ -33,12 +34,26 @@ PROJECT_ROOT = BASE_DIR.parent
 RAW_DATA_DIR = (PROJECT_ROOT / "data" / "raw").resolve()
 UNIVERSITIES_FILE = BASE_DIR / "config" / "universities.json"
 
+USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/126.0.0.0 Safari/537.36"
+)
+VIEWPORT = {"width": 1280, "height": 800}
+BLOCKED_PHRASES = (
+    "403 forbidden",
+    "access denied",
+    "just a moment",
+    "cloudflare",
+    "page not found",
+)
+
 DEFAULT_UNIVERSITIES: list[dict[str, str]] = [
     {
         "id": "fast-nu-cs",
         "name": "FAST National University",
         "country": "Pakistan",
-        "admission_page_url": "https://www.nu.edu.pk/Admissions",
+        "admission_page_url": "https://www.nu.edu.pk/Admission/Schedule",
         "program_level": "Masters",
         "field": "Computer Science",
     },
@@ -46,7 +61,7 @@ DEFAULT_UNIVERSITIES: list[dict[str, str]] = [
         "id": "nust-cs",
         "name": "NUST",
         "country": "Pakistan",
-        "admission_page_url": "https://nust.edu.pk/admissions/",
+        "admission_page_url": "https://admissions.nust.edu.pk/",
         "program_level": "Masters",
         "field": "Computer Science",
     },
@@ -54,15 +69,16 @@ DEFAULT_UNIVERSITIES: list[dict[str, str]] = [
         "id": "metu-cs",
         "name": "Middle East Technical University",
         "country": "Turkey",
-        "admission_page_url": "https://international.metu.edu.tr/graduate-admissions",
+        "admission_page_url": "https://oibs2.metu.edu.tr/Eng/login.aspx",
         "program_level": "Masters",
         "field": "Computer Science",
+        "manual_check_needed": True,
     },
     {
         "id": "tu-berlin-cs",
         "name": "Technical University of Berlin",
         "country": "Germany",
-        "admission_page_url": "https://www.tu.berlin/en/studying/degree-programmes/application-admission",
+        "admission_page_url": "https://www.tu.berlin/en/studying/prospective-students/degree-programmes",
         "program_level": "Masters",
         "field": "Computer Science",
     },
@@ -112,6 +128,17 @@ def truncate_text(text: str, limit: int = 15000) -> str:
     return cleaned[:limit].rstrip()
 
 
+def classify_scrape_output(raw_text: str) -> tuple[str, str | None]:
+    """Mark obvious blocked or useless pages so we do not trust them as success."""
+    cleaned = raw_text.strip()
+    lower_text = cleaned.lower()
+    if len(cleaned) < 500:
+        return "blocked_or_invalid", "Extracted text was too short to be useful for extraction."
+    if any(phrase in lower_text for phrase in BLOCKED_PHRASES):
+        return "blocked_or_invalid", "Extracted text appears to be a blocked or invalid page."
+    return "success", None
+
+
 def extract_visible_text(page) -> str:
     """
     Extract visible text from the page body after stripping noisy tags.
@@ -138,26 +165,19 @@ def scrape_university(page, university: dict[str, Any]) -> dict[str, Any]:
     scraped_at = datetime.now(timezone.utc).isoformat()
 
     try:
-        page.goto(source_url, wait_until="domcontentloaded", timeout=30000)
-        try:
-            page.wait_for_load_state("networkidle", timeout=15000)
-        except PlaywrightTimeoutError:
-            # Network idle is nice to have, but not all pages ever fully quiet down.
-            pass
+        page.goto(source_url, wait_until="domcontentloaded", timeout=45000)
 
         raw_text = extract_visible_text(page)
         raw_text = truncate_text(raw_text)
-
-        if not raw_text:
-            raise ValueError("Page loaded but no visible text was extracted.")
+        scrape_status, quality_note = classify_scrape_output(raw_text)
 
         return {
             "university_id": university["id"],
             "source_url": source_url,
             "scraped_at": scraped_at,
             "raw_text": raw_text,
-            "scrape_status": "success",
-            "error_message": None,
+            "scrape_status": scrape_status,
+            "error_message": quality_note,
         }
     except Exception as exc:  # noqa: BLE001
         return {
@@ -175,9 +195,9 @@ def run_scraper(target_universities: list[dict[str, Any]]) -> list[dict[str, Any
     results: list[dict[str, Any]] = []
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=True)
-        context = browser.new_context()
+        context = browser.new_context(user_agent=USER_AGENT, viewport=VIEWPORT)
 
-        for university in target_universities:
+        for index, university in enumerate(target_universities):
             page = context.new_page()
             payload = scrape_university(page, university)
             page.close()
@@ -186,8 +206,13 @@ def run_scraper(target_universities: list[dict[str, Any]]) -> list[dict[str, Any
 
             if payload["scrape_status"] == "success":
                 print(f"[{university['id']}] saved {output_path}")
+            elif payload["scrape_status"] == "blocked_or_invalid":
+                print(f"[{university['id']}] blocked_or_invalid: {payload['error_message']}")
             else:
                 print(f"[{university['id']}] failed: {payload['error_message']}")
+
+            if index < len(target_universities) - 1:
+                time.sleep(random.uniform(2, 5))
 
         context.close()
         browser.close()
