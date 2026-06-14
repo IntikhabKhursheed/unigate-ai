@@ -1,0 +1,32 @@
+[
+  {
+    "id": "uet-lahore",
+    "name": "University of Engineering and Technology Lahore",
+    "country": "Pakistan",
+    "admission_page_url": "https://www.uet.edu.pk/admissions"
+  },
+  {
+    "id": "university-of-manchester",
+    "name": "The University of Manchester",
+    "country": "UK",
+    "admission_page_url": "https://www.manchester.ac.uk/study/undergraduate/applications/"
+  },
+  {
+    "id": "technical-university-of-munich",
+    "name": "Technical University of Munich",
+    "country": "Germany",
+    "admission_page_url": "https://www.tum.de/en/studies/application"
+  },
+  {
+    "id": "istanbul-university",
+    "name": "Istanbul University",
+    "country": "Turkey",
+    "admission_page_url": "https://www.istanbul.edu.tr/en/education/admissions"
+  },
+  {
+    "id": "university-of-toronto",
+    "name": "University of Toronto",
+    "country": "Canada",
+    "admission_page_url": "https://future.utoronto.ca/apply/"
+  }
+]
