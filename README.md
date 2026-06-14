@@ -79,6 +79,25 @@ docker compose up -d
 
 Copy `.env.example` to `.env` and fill in your values.
 
+### 6. Install Playwright browsers
+
+```bash
+python -m playwright install chromium
+```
+
+This only needs to be done once after installing the Python dependencies.
+
+## Manual Data Collection
+
+When automated scraping is blocked, use the manual workflow described in [`data/manual/README.md`](data/manual/README.md).
+
+In short:
+
+1. Open the university admission page in a browser.
+2. Copy the relevant text for program details, deadlines, fees, and scholarships.
+3. Save it as `data/manual/{university_id}.txt` in UTF-8 plain text.
+4. Re-run `python scraper/scrape.py --all` so the manual file is used instead of a live scrape.
+
 ## Data flow
 
 1. The scraper fetches admission pages and stores raw HTML/text in `data/raw/`
@@ -86,7 +105,44 @@ Copy `.env.example` to `.env` and fill in your values.
 3. The server reads processed data, stores it in MongoDB, and serves API endpoints
 4. The client queries the server and presents search, compare, and recommendation views
 
+## Full Pipeline
+
+Run the pipeline in this order:
+
+```bash
+python scraper/scrape.py --all
+python extraction/extract.py --all
+python scraper/report.py
+python extraction/report.py
+python extraction/validate.py
+```
+
+If you need to process one university at a time:
+
+```bash
+python scraper/scrape.py --id uoft-cs
+python extraction/extract.py --id uoft-cs
+```
+
 ## Current status
 
-This is an initial scaffold.
-The TODO markers show where scraper logic, AI extraction prompts, validation, and real database wiring should be added next.
+This is an initial scaffold with the scraping and extraction pipeline wired up.
+
+### Raw data
+
+- `fast-nu-cs`: raw data exists, but the live scrape was blocked or invalid
+- `nust-cs`: raw data exists, but the live scrape hit network/DNS issues in this environment
+- `metu-cs`: raw data exists, but the live scrape was blocked or invalid
+- `tu-berlin-cs`: raw data exists, but the live scrape was blocked or invalid
+- `uoft-cs`: raw data exists and is the best current extraction candidate
+
+### Processed data
+
+- No processed university files exist yet because the Toronto extraction failed in this environment due an invalid Gemini API key
+
+### Manual data entry
+
+- Manual placeholder files exist for `fast-nu-cs`, `nust-cs`, `metu-cs`, and `tu-berlin-cs`
+- Add real text to `data/manual/{university_id}.txt` when automated scraping is blocked or incomplete
+
+The TODO markers in the code show where additional scraping resilience, extraction refinements, and backend wiring can be added next.

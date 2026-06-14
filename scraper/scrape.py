@@ -33,6 +33,8 @@ BASE_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = BASE_DIR.parent
 RAW_DATA_DIR = (PROJECT_ROOT / "data" / "raw").resolve()
 UNIVERSITIES_FILE = BASE_DIR / "config" / "universities.json"
+MANUAL_DATA_DIR = (PROJECT_ROOT / "data" / "manual").resolve()
+MANUAL_PLACEHOLDER = "PASTE ADMISSION PAGE CONTENT HERE"
 
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -120,6 +122,26 @@ def save_raw_payload(university_id: str, payload: dict[str, Any]) -> Path:
     return output_path
 
 
+def load_manual_payload(university: dict[str, Any]) -> dict[str, Any] | None:
+    """Load manual text if it exists and is not just the placeholder."""
+    manual_file = MANUAL_DATA_DIR / f"{university['id']}.txt"
+    if not manual_file.exists():
+        return None
+
+    content = manual_file.read_text(encoding="utf-8").strip()
+    if not content or content == MANUAL_PLACEHOLDER:
+        return None
+
+    return {
+        "university_id": university["id"],
+        "source_url": university["admission_page_url"],
+        "scraped_at": datetime.now(timezone.utc).isoformat(),
+        "raw_text": content,
+        "scrape_status": "manual",
+        "error_message": None,
+    }
+
+
 def truncate_text(text: str, limit: int = 15000) -> str:
     """Trim long text so the extraction step stays within context limits."""
     cleaned = text.strip()
@@ -198,14 +220,21 @@ def run_scraper(target_universities: list[dict[str, Any]]) -> list[dict[str, Any
         context = browser.new_context(user_agent=USER_AGENT, viewport=VIEWPORT)
 
         for index, university in enumerate(target_universities):
-            page = context.new_page()
-            payload = scrape_university(page, university)
-            page.close()
+            manual_payload = load_manual_payload(university)
+            if manual_payload is not None:
+                payload = manual_payload
+            else:
+                page = context.new_page()
+                payload = scrape_university(page, university)
+                page.close()
+
             results.append(payload)
             output_path = save_raw_payload(university["id"], payload)
 
             if payload["scrape_status"] == "success":
                 print(f"[{university['id']}] saved {output_path}")
+            elif payload["scrape_status"] == "manual":
+                print(f"[{university['id']}] manual -> {output_path}")
             elif payload["scrape_status"] == "blocked_or_invalid":
                 print(f"[{university['id']}] blocked_or_invalid: {payload['error_message']}")
             else:

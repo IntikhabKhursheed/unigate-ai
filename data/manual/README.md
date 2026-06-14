@@ -1,0 +1,1 @@
+For universities where automated scraping fails or is blocked by anti-bot protection, manually visit the admission page in a browser, copy the relevant text containing program details, application deadlines, fees, and scholarship information, and save it as `data/manual/{university_id}.txt` (plain text, UTF-8).
