@@ -94,14 +94,14 @@ def load_raw_payload(path: Path) -> dict[str, Any]:
 def _basic_validate_extracted_data(payload: dict[str, Any]) -> None:
     """Validate the Gemini response with lightweight type checks."""
     required_string_fields = [
-        "university_name",
-        "country",
         "program_name",
         "degree_level",
         "notes",
         "extraction_confidence",
     ]
     required_nullable_string_fields = [
+        "university_name",
+        "country",
         "application_deadline_start",
         "application_deadline_end",
         "application_fee_currency",
@@ -234,6 +234,11 @@ def _normalize_extracted_payload(
         "extraction_confidence": parsed.get("extraction_confidence"),
         "notes": parsed.get("notes"),
     }
+  
+    print("DEBUG PARSED:", json.dumps(parsed, indent=2, ensure_ascii=False))
+    print("DEBUG NORMALIZED:", json.dumps(normalized, indent=2, ensure_ascii=False))
+    _basic_validate_extracted_data(normalized)
+    return normalized
 
     _basic_validate_extracted_data(normalized)
     return normalized
