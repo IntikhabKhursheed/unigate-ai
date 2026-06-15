@@ -15,13 +15,12 @@ router.get("/", async (req, res) => {
     if (fee_type === "paid") filters.application_fee_required = true;
 
     if (deadline_from || deadline_to) {
-      // This works best when deadline dates are stored in ISO-8601 format.
       filters.application_deadline_end = {};
       if (deadline_from) filters.application_deadline_end.$gte = deadline_from;
       if (deadline_to) filters.application_deadline_end.$lte = deadline_to;
     }
 
-    const universities = await University.find(filters).sort({ last_updated: -1 });
+    const universities = await University.find(filters).sort({ extracted_at: -1 });
     res.json(universities);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch universities" });

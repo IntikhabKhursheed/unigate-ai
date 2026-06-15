@@ -5,8 +5,7 @@ const express = require("express");
 const cors = require("cors");
 
 const universityRoutes = require("./routes/universities");
-const searchRoutes = require("./routes/search");
-const recommendationRoutes = require("./routes/recommendations");
+const aiRoutes = require("./routes/ai");
 const { connectDatabase } = require("./config/database");
 
 dotenv.config();
@@ -26,8 +25,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/universities", universityRoutes);
-app.use("/", searchRoutes);
-app.use("/", recommendationRoutes);
+app.use("/", aiRoutes);
 
 async function startServer() {
   try {
