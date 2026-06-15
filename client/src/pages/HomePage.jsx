@@ -3,7 +3,6 @@ import UniversityCard from "../components/UniversityCard";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
-const COUNTRY_OPTIONS = ["", "Canada", "Germany", "Pakistan", "Turkey", "UK"];
 const DEGREE_LEVEL_OPTIONS = ["", "Bachelors", "Masters", "PhD", "Other"];
 
 const DEFAULT_FILTERS = {
@@ -17,6 +16,7 @@ function HomePage() {
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const [searchText, setSearchText] = useState("");
   const [universities, setUniversities] = useState([]);
+  const [availableCountries, setAvailableCountries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingLabel, setLoadingLabel] = useState("Loading universities...");
   const [error, setError] = useState("");
@@ -45,6 +45,22 @@ function HomePage() {
 
       const data = await response.json();
       setUniversities(Array.isArray(data) ? data : []);
+      if (
+        nextFilters === DEFAULT_FILTERS ||
+        (nextFilters.country === "" &&
+          nextFilters.degreeLevel === "" &&
+          nextFilters.feeType === "any" &&
+          nextFilters.scholarshipAvailable === "any")
+      ) {
+        const countries = Array.from(
+          new Set(
+            (Array.isArray(data) ? data : [])
+              .map((university) => university.country)
+              .filter(Boolean)
+          )
+        ).sort();
+        setAvailableCountries(countries);
+      }
       setViewMode("browse");
     } catch (fetchError) {
       setError(fetchError.message || "Failed to load universities");
@@ -177,7 +193,7 @@ function HomePage() {
                 className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-slate-100 focus:border-sky-400 focus:outline-none"
               >
                 <option value="">Any country</option>
-                {COUNTRY_OPTIONS.filter(Boolean).map((country) => (
+                {availableCountries.map((country) => (
                   <option key={country} value={country}>
                     {country}
                   </option>

@@ -1,0 +1,19 @@
+{
+  "university_id": "tu-berlin-cs",
+  "university_name": "Technical University of Berlin",
+  "country": "Germany",
+  "program_name": "MSc Computer Science",
+  "degree_level": "Masters",
+  "application_deadline_start": "2026-05-01",
+  "application_deadline_end": "2026-07-15",
+  "application_fee_required": false,
+  "application_fee_amount": 0,
+  "application_fee_currency": "EUR",
+  "scholarship_available": false,
+  "scholarship_details": null,
+  "program_url": "https://www.tu.berlin/en/studying/prospective-students/degree-programmes",
+  "source_url": "https://www.tu.berlin/en/studying/prospective-students/degree-programmes",
+  "extraction_confidence": "manual_seed",
+  "notes": "Manually curated seed data for demo purposes. TU Berlin charges a semester contribution fee (no separate application fee). Verify exact dates and amounts on the official site.",
+  "extracted_at": "2026-06-15T11:41:58.938177+00:00"
+}

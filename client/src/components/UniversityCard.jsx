@@ -95,7 +95,7 @@ function UniversityCard({ university, score, showDetailsLink = true }) {
           <div>
             <h3 className="text-lg font-semibold text-slate-50">{university.university_name}</h3>
             <p className="mt-1 text-sm text-slate-400">
-              {university.country} • {university.degree_level}
+              {university.country} {" • "} {university.degree_level}
             </p>
           </div>
           <div className="flex flex-col items-end gap-2">

@@ -74,6 +74,20 @@ function UniversityDetailPage() {
         ) : null}
       </div>
 
+      {university?.extraction_confidence === "manual_seed" && university?.source_url ? (
+        <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 text-sm text-amber-100">
+          <span className="font-medium">Demo seed data:</span> This is demo/seed data - verify details on the official university website.{" "}
+          <a
+            href={university.source_url}
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-amber-200 underline underline-offset-2 transition hover:text-amber-100"
+          >
+            Open source
+          </a>
+        </div>
+      ) : null}
+
       {loading ? (
         <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-6 text-slate-300">
           Loading university details...
@@ -87,7 +101,7 @@ function UniversityDetailPage() {
           <div>
             <h2 className="text-2xl font-semibold text-slate-50">{university.university_name}</h2>
             <p className="mt-1 text-slate-400">
-              {university.country} • {university.degree_level}
+              {university.country} {" • "} {university.degree_level}
             </p>
           </div>
 
@@ -133,7 +147,6 @@ function UniversityDetailPage() {
               )}
             </DetailItem>
             <DetailItem label="Extracted at">{university.extracted_at || "Not specified"}</DetailItem>
-            <DetailItem label="Record status">{university.status || "Not specified"}</DetailItem>
           </div>
 
           <details className="rounded-2xl border border-slate-800 bg-slate-950/60 p-4">

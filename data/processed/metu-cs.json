@@ -1,0 +1,19 @@
+{
+  "university_id": "metu-cs",
+  "university_name": "Middle East Technical University (METU)",
+  "country": "Turkey",
+  "program_name": "MS Computer Engineering",
+  "degree_level": "Masters",
+  "application_deadline_start": "2026-05-01",
+  "application_deadline_end": "2026-06-30",
+  "application_fee_required": false,
+  "application_fee_amount": null,
+  "application_fee_currency": null,
+  "scholarship_available": true,
+  "scholarship_details": "Graduate assistantships and tuition waivers available for qualified international students.",
+  "program_url": "https://oibs2.metu.edu.tr/",
+  "source_url": "https://oibs2.metu.edu.tr/",
+  "extraction_confidence": "manual_seed",
+  "notes": "Manually curated seed data for demo purposes. Verify exact dates and fees on the official site.",
+  "extracted_at": "2026-06-15T11:41:58.938177+00:00"
+}

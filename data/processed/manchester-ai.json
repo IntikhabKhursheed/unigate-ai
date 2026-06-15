@@ -1,0 +1,19 @@
+{
+  "university_id": "manchester-ai",
+  "university_name": "University of Manchester",
+  "country": "UK",
+  "program_name": "MSc Artificial Intelligence",
+  "degree_level": "Masters",
+  "application_deadline_start": "2026-06-01",
+  "application_deadline_end": "2027-01-31",
+  "application_fee_required": false,
+  "application_fee_amount": 0,
+  "application_fee_currency": "GBP",
+  "scholarship_available": true,
+  "scholarship_details": "Various merit-based and country-specific scholarships available for international students.",
+  "program_url": "https://www.manchester.ac.uk/study/masters/courses/list/",
+  "source_url": "https://www.manchester.ac.uk/study/masters/courses/list/",
+  "extraction_confidence": "manual_seed",
+  "notes": "Manually curated seed data for demo purposes. Verify exact dates and fees on the official site.",
+  "extracted_at": "2026-06-15T11:41:58.938177+00:00"
+}
