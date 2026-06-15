@@ -1,3 +1,5 @@
+require("dns").setDefaultResultOrder("ipv4first");
+
 const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
@@ -34,7 +36,12 @@ async function startServer() {
       console.log(`UniGate API listening on port ${port}`);
     });
   } catch (error) {
-    console.error("Failed to start server:", error);
+    const message = String(error?.message || error);
+    if (message.includes("querySrv") || message.includes("mongodb+srv://") || message.includes("_mongodb._tcp")) {
+      console.error("Failed to start server: MongoDB SRV DNS resolution failed on this Windows/Node setup.");
+      console.error("Try using a non-SRV connection string with mongodb:// and explicit hosts instead of mongodb+srv://.");
+    }
+    console.error("Failed to start server:", message);
     process.exit(1);
   }
 }

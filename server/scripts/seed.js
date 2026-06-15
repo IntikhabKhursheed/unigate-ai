@@ -1,3 +1,5 @@
+require("dns").setDefaultResultOrder("ipv4first");
+
 const fs = require("fs/promises");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -67,7 +69,12 @@ async function seedUniversities() {
 
 seedUniversities()
   .catch((error) => {
-    console.error("Seed failed:", error.message);
+    const message = String(error?.message || error);
+    if (message.includes("querySrv") || message.includes("mongodb+srv://") || message.includes("_mongodb._tcp")) {
+      console.error("Seed failed: MongoDB SRV DNS resolution failed on this Windows/Node setup.");
+      console.error("Try using a non-SRV connection string with mongodb:// and explicit hosts instead of mongodb+srv://.");
+    }
+    console.error("Seed failed:", message);
     process.exitCode = 1;
   })
   .finally(async () => {
