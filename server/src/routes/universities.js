@@ -11,8 +11,8 @@ router.get("/", async (req, res) => {
 
     if (country) filters.country = new RegExp(country, "i");
     if (program) filters.program_name = new RegExp(program, "i");
-    if (fee_type === "free") filters["application_fee.required"] = false;
-    if (fee_type === "paid") filters["application_fee.required"] = true;
+    if (fee_type === "free") filters.application_fee_required = false;
+    if (fee_type === "paid") filters.application_fee_required = true;
 
     if (deadline_from || deadline_to) {
       // This works best when deadline dates are stored in ISO-8601 format.
@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
 // GET /universities/:id
 router.get("/:id", async (req, res) => {
   try {
-    const university = await University.findById(req.params.id);
+    const university = await University.findOne({ university_id: req.params.id });
 
     if (!university) {
       return res.status(404).json({ error: "University not found" });

@@ -24,35 +24,61 @@ except ImportError:  # pragma: no cover - dependency is installed from requireme
 
 try:
     from dotenv import load_dotenv
+    DOTENV_AVAILABLE = True
 except ImportError:  # pragma: no cover - dependency is installed from requirements.txt
     def load_dotenv() -> bool:  # type: ignore[override]
         """Fallback `.env` loader for clean environments without python-dotenv."""
-        project_root = Path(__file__).resolve().parent.parent
-        env_path = project_root / ".env"
-        if not env_path.exists():
-            env_path = Path(__file__).resolve().parent / ".env"
-        if not env_path.exists():
-            return False
-
-        loaded = False
-        with env_path.open("r", encoding="utf-8") as file:
-            for line in file:
-                stripped = line.strip()
-                if not stripped or stripped.startswith("#") or "=" not in stripped:
-                    continue
-                key, value = stripped.split("=", 1)
-                os.environ.setdefault(key.strip(), value.strip().strip("'\""))
-                loaded = True
-        return loaded
-
-
-load_dotenv()
+        return False
+    DOTENV_AVAILABLE = False
 
 
 BASE_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = BASE_DIR.parent
 RAW_DATA_DIR = (PROJECT_ROOT / "data" / "raw").resolve()
 PROCESSED_DATA_DIR = (PROJECT_ROOT / "data" / "processed").resolve()
+UNIVERSITY_CONFIG_PATHS = [
+    BASE_DIR / ".." / "scraper" / "config" / "universities.json",
+    PROJECT_ROOT / "scraper" / "config" / "universities.json",
+    PROJECT_ROOT / "config" / "universities.json",
+]
+ENV_PATHS = [
+    PROJECT_ROOT / ".env",
+    PROJECT_ROOT / "server" / ".env",
+    BASE_DIR / ".env",
+]
+
+
+def _load_university_config() -> dict[str, dict[str, Any]]:
+    """Load the scraper university config and index it by university id."""
+    for candidate in UNIVERSITY_CONFIG_PATHS:
+        resolved = candidate.resolve()
+        if resolved.exists():
+            with resolved.open("r", encoding="utf-8") as file:
+                records = json.load(file)
+            if not isinstance(records, list):
+                raise ValueError(f"{resolved} must contain a JSON array.")
+
+            indexed: dict[str, dict[str, Any]] = {}
+            for record in records:
+                if isinstance(record, dict) and record.get("id"):
+                    indexed[str(record["id"])] = record
+            return indexed
+
+    return {}
+
+
+def _load_env_files() -> None:
+    """Load known .env locations so the extractor works from the repo root."""
+    if DOTENV_AVAILABLE:
+        for env_path in ENV_PATHS:
+            if env_path.exists():
+                load_dotenv(env_path, override=False)
+
+
+_load_env_files()
+
+
+UNIVERSITIES_BY_ID = _load_university_config()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash").strip()
@@ -215,12 +241,33 @@ def _normalize_extracted_payload(
     university_id: str,
 ) -> dict[str, Any]:
     """Merge the model output with local metadata and enforce expected fields."""
+    config_entry = UNIVERSITIES_BY_ID.get(university_id, {})
+    config_name = config_entry.get("name")
+    config_country = config_entry.get("country")
+    config_program_url = config_entry.get("admission_page_url")
+
+    university_name = parsed.get("university_name") or config_name
+    country = parsed.get("country") or config_country
+    program_url = parsed.get("program_url") or config_program_url
+    notes = parsed.get("notes") or ""
+    note_bits: list[str] = [notes] if notes else []
+
+    if not parsed.get("university_name") and config_name:
+        note_bits.append("university_name populated from config")
+    if not parsed.get("country") and config_country:
+        note_bits.append("country populated from config")
+    if not parsed.get("program_url") and config_program_url:
+        note_bits.append("program_url populated from config")
+
+    if "manual_check_needed" in config_entry:
+        note_bits.append("manual_check_needed: true")
+
     normalized = {
         "university_id": university_id,
         "source_url": _get_source_url(raw_payload),
         "extracted_at": datetime.now(timezone.utc).isoformat(),
-        "university_name": parsed.get("university_name"),
-        "country": parsed.get("country"),
+        "university_name": university_name,
+        "country": country,
         "program_name": parsed.get("program_name"),
         "degree_level": parsed.get("degree_level"),
         "application_deadline_start": parsed.get("application_deadline_start"),
@@ -230,15 +277,10 @@ def _normalize_extracted_payload(
         "application_fee_currency": parsed.get("application_fee_currency"),
         "scholarship_available": parsed.get("scholarship_available"),
         "scholarship_details": parsed.get("scholarship_details"),
-        "program_url": parsed.get("program_url"),
+        "program_url": program_url,
         "extraction_confidence": parsed.get("extraction_confidence"),
-        "notes": parsed.get("notes"),
+        "notes": "; ".join(note_bits).strip("; "),
     }
-  
-    print("DEBUG PARSED:", json.dumps(parsed, indent=2, ensure_ascii=False))
-    print("DEBUG NORMALIZED:", json.dumps(normalized, indent=2, ensure_ascii=False))
-    _basic_validate_extracted_data(normalized)
-    return normalized
 
     _basic_validate_extracted_data(normalized)
     return normalized
