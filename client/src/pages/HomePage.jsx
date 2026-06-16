@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import UniversityCard from "../components/UniversityCard";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api";
 
 const DEGREE_LEVEL_OPTIONS = ["", "Bachelors", "Masters", "PhD", "Other"];
 

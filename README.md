@@ -146,3 +146,27 @@ This is an initial scaffold with the scraping and extraction pipeline wired up.
 - Add real text to `data/manual/{university_id}.txt` when automated scraping is blocked or incomplete
 
 The TODO markers in the code show where additional scraping resilience, extraction refinements, and backend wiring can be added next.
+
+## Vercel Deployment
+
+This repository is configured as a monorepo for Vercel:
+
+- `client/` builds the React app
+- `server/api/` contains the serverless function implementations
+- root `api/` contains thin wrappers so Vercel can discover the functions from the repo root
+
+Deployment notes:
+
+- The client defaults to `/api` as its backend base URL in production
+- Vercel builds the client from `client/` and serves `client/dist`
+- The serverless functions read `MONGODB_URI`, `GEMINI_API_KEY`, and `GEMINI_MODEL` from Vercel environment variables
+
+For local development, keep using:
+
+```bash
+cd server
+npm run dev
+
+cd ../client
+npm run dev
+```

@@ -7,9 +7,10 @@ export default defineConfig({
     port: 5174,
     strictPort: true,
     proxy: {
-      "/universities": "http://localhost:5000",
-      "/search": "http://localhost:5000",
-      "/recommendations": "http://localhost:5000",
+      "/api": {
+        target: "http://localhost:5000",
+        changeOrigin: true,
+      },
     },
   },
 });

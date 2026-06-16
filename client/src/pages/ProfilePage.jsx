@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import UniversityCard from "../components/UniversityCard";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api";
 const FALLBACK_COUNTRIES = ["Canada", "Germany", "Pakistan", "Turkey", "UK"];
 
 function ProfilePage() {

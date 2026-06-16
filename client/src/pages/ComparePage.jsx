@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { formatApplicationFee, formatDeadline } from "../components/UniversityCard";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api";
 const MAX_COMPARE = 3;
 
 function getFeeState(university) {
