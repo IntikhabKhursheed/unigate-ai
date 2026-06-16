@@ -1,5 +1,4 @@
 {
-  "university_id": "manchester-ai",
   "university_name": "University of Manchester",
   "country": "UK",
   "program_name": "MSc Artificial Intelligence",
@@ -12,8 +11,9 @@
   "scholarship_available": true,
   "scholarship_details": "Various merit-based and country-specific scholarships available for international students.",
   "program_url": "https://www.manchester.ac.uk/study/masters/courses/list/",
+  "extraction_confidence": "low",
+  "notes": "Offline demo fallback used because Gemini was unavailable in this environment. Verify the admissions details on the official website.",
+  "university_id": "manchester-ai",
   "source_url": "https://www.manchester.ac.uk/study/masters/courses/list/",
-  "extraction_confidence": "manual_seed",
-  "notes": "Manually curated seed data for demo purposes. Verify exact dates and fees on the official site.",
-  "extracted_at": "2026-06-15T11:41:58.938177+00:00"
+  "extracted_at": "2026-06-16T06:04:57.632424+00:00"
 }

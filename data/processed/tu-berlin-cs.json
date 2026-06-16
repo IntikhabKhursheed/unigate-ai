@@ -1,5 +1,4 @@
 {
-  "university_id": "tu-berlin-cs",
   "university_name": "Technical University of Berlin",
   "country": "Germany",
   "program_name": "MSc Computer Science",
@@ -12,8 +11,9 @@
   "scholarship_available": false,
   "scholarship_details": null,
   "program_url": "https://www.tu.berlin/en/studying/prospective-students/degree-programmes",
+  "extraction_confidence": "low",
+  "notes": "Offline demo fallback used because Gemini was unavailable in this environment. TU Berlin charges a semester contribution fee (no separate application fee). Verify the admissions details on the official website.",
+  "university_id": "tu-berlin-cs",
   "source_url": "https://www.tu.berlin/en/studying/prospective-students/degree-programmes",
-  "extraction_confidence": "manual_seed",
-  "notes": "Manually curated seed data for demo purposes. TU Berlin charges a semester contribution fee (no separate application fee). Verify exact dates and amounts on the official site.",
-  "extracted_at": "2026-06-15T11:41:58.938177+00:00"
+  "extracted_at": "2026-06-16T06:04:55.698127+00:00"
 }

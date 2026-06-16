@@ -1,5 +1,4 @@
 {
-  "university_id": "fast-nu-cs",
   "university_name": "FAST National University (FAST-NUCES)",
   "country": "Pakistan",
   "program_name": "MS Computer Science",
@@ -12,8 +11,9 @@
   "scholarship_available": true,
   "scholarship_details": "Merit scholarships and financial aid programs available based on academic performance and need.",
   "program_url": "https://www.nu.edu.pk/Admission/Schedule",
+  "extraction_confidence": "low",
+  "notes": "Offline demo fallback used because Gemini was unavailable in this environment. Verify the admissions details on the official website.",
+  "university_id": "fast-nu-cs",
   "source_url": "https://www.nu.edu.pk/Admission/Schedule",
-  "extraction_confidence": "manual_seed",
-  "notes": "Manually curated seed data for demo purposes. Verify exact dates and fees on the official site.",
-  "extracted_at": "2026-06-15T11:41:58.938177+00:00"
+  "extracted_at": "2026-06-16T06:04:51.961143+00:00"
 }

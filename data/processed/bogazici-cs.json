@@ -1,5 +1,4 @@
 {
-  "university_id": "bogazici-cs",
   "university_name": "Bogazici University",
   "country": "Turkey",
   "program_name": "MS Computer Engineering",
@@ -12,8 +11,9 @@
   "scholarship_available": true,
   "scholarship_details": "Graduate assistantships available for qualified students, providing tuition waiver and stipend.",
   "program_url": "https://cmpe.bogazici.edu.tr/",
+  "extraction_confidence": "low",
+  "notes": "Offline demo fallback used because Gemini was unavailable in this environment. Verify the admissions details on the official website.",
+  "university_id": "bogazici-cs",
   "source_url": "https://cmpe.bogazici.edu.tr/",
-  "extraction_confidence": "manual_seed",
-  "notes": "Manually curated seed data for demo purposes. Verify exact dates and fees on the official site.",
-  "extracted_at": "2026-06-15T11:41:58.938177+00:00"
+  "extracted_at": "2026-06-16T06:05:00.832250+00:00"
 }
