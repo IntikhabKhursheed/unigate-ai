@@ -39,5 +39,374 @@
     "admission_page_url": "https://web.cs.toronto.edu/graduate/admissions",
     "program_level": "Masters",
     "field": "Computer Science"
+  },
+  {
+    "id": "bit-cs",
+    "name": "Beijing Institute of Technology",
+    "country": "China",
+    "admission_page_url": "https://isc.bit.edu.cn/",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "hit-ai",
+    "name": "Harbin Institute of Technology",
+    "country": "China",
+    "admission_page_url": "https://en.hit.edu.cn/admissions",
+    "program_level": "Masters",
+    "field": "Artificial Intelligence",
+    "manual_check_needed": false
+  },
+  {
+    "id": "zhejiang-ds",
+    "name": "Zhejiang University",
+    "country": "China",
+    "admission_page_url": "https://www.zju.edu.cn/english/",
+    "program_level": "Masters",
+    "field": "Data Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "ustc-cs",
+    "name": "University of Science and Technology of China",
+    "country": "China",
+    "admission_page_url": "https://isa.ustc.edu.cn/",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "tongji-se",
+    "name": "Tongji University",
+    "country": "China",
+    "admission_page_url": "https://study.tongji.edu.cn/",
+    "program_level": "Masters",
+    "field": "Software Engineering",
+    "manual_check_needed": false
+  },
+  {
+    "id": "utm-cs",
+    "name": "Universiti Teknologi Malaysia (UTM)",
+    "country": "Malaysia",
+    "admission_page_url": "https://admission.utm.my/",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "um-ds",
+    "name": "Universiti Malaya (UM)",
+    "country": "Malaysia",
+    "admission_page_url": "https://study.um.edu.my/",
+    "program_level": "Masters",
+    "field": "Data Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "apu-ai",
+    "name": "Asia Pacific University (APU)",
+    "country": "Malaysia",
+    "admission_page_url": "https://www.apu.edu.my/admissions",
+    "program_level": "Masters",
+    "field": "Artificial Intelligence",
+    "manual_check_needed": false
+  },
+  {
+    "id": "ctu-prague-cs",
+    "name": "Czech Technical University in Prague",
+    "country": "Czech Republic",
+    "admission_page_url": "https://www.cvut.cz/en/degree-programmes",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "charles-prague-ai",
+    "name": "Charles University Prague",
+    "country": "Czech Republic",
+    "admission_page_url": "https://cuni.cz/UKEN-1.html",
+    "program_level": "Masters",
+    "field": "Artificial Intelligence",
+    "manual_check_needed": false
+  },
+  {
+    "id": "bme-cs",
+    "name": "Budapest University of Technology",
+    "country": "Hungary",
+    "admission_page_url": "https://www.bme.hu/en/admission",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "elte-ds",
+    "name": "Eotvos Lorand University (ELTE)",
+    "country": "Hungary",
+    "admission_page_url": "https://www.elte.hu/en/admissions",
+    "program_level": "Masters",
+    "field": "Data Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "polimi-cs",
+    "name": "Politecnico di Milano",
+    "country": "Italy",
+    "admission_page_url": "https://www.polimi.it/en/prospective-students",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "bologna-ai",
+    "name": "University of Bologna",
+    "country": "Italy",
+    "admission_page_url": "https://www.unibo.it/en/study",
+    "program_level": "Masters",
+    "field": "Artificial Intelligence",
+    "manual_check_needed": false
+  },
+  {
+    "id": "sapienza-ds",
+    "name": "Sapienza University of Rome",
+    "country": "Italy",
+    "admission_page_url": "https://www.uniroma1.it/en/pagina-strutturale/home",
+    "program_level": "Masters",
+    "field": "Data Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "tudelft-cs",
+    "name": "Delft University of Technology (TU Delft)",
+    "country": "Netherlands",
+    "admission_page_url": "https://www.tudelft.nl/en/education/programmes/masters",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "uva-ai",
+    "name": "University of Amsterdam",
+    "country": "Netherlands",
+    "admission_page_url": "https://www.uva.nl/en/education/masters.html",
+    "program_level": "Masters",
+    "field": "Artificial Intelligence",
+    "manual_check_needed": false
+  },
+  {
+    "id": "tue-ds",
+    "name": "Eindhoven University of Technology",
+    "country": "Netherlands",
+    "admission_page_url": "https://www.tue.nl/en/education/graduate-school",
+    "program_level": "Masters",
+    "field": "Data Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "kth-cs",
+    "name": "KTH Royal Institute of Technology",
+    "country": "Sweden",
+    "admission_page_url": "https://www.kth.se/en/studies/master",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "chalmers-ds",
+    "name": "Chalmers University of Technology",
+    "country": "Sweden",
+    "admission_page_url": "https://www.chalmers.se/en/education/your-studies/application-and-admission/",
+    "program_level": "Masters",
+    "field": "Data Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "uio-cs",
+    "name": "University of Oslo",
+    "country": "Norway",
+    "admission_page_url": "https://www.uio.no/english/studies/admission/master/",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "ntnu-ai",
+    "name": "Norwegian University of Science and Technology (NTNU)",
+    "country": "Norway",
+    "admission_page_url": "https://www.ntnu.edu/studies/msai",
+    "program_level": "Masters",
+    "field": "Artificial Intelligence",
+    "manual_check_needed": false
+  },
+  {
+    "id": "aalto-cs",
+    "name": "Aalto University",
+    "country": "Finland",
+    "admission_page_url": "https://www.aalto.fi/en/study-options",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "helsinki-ds",
+    "name": "University of Helsinki",
+    "country": "Finland",
+    "admission_page_url": "https://www.helsinki.fi/en/admissions-and-education",
+    "program_level": "Masters",
+    "field": "Data Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "tuwien-cs",
+    "name": "Vienna University of Technology (TU Wien)",
+    "country": "Austria",
+    "admission_page_url": "https://www.tuwien.at/en/studies/admission",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "upm-ai",
+    "name": "Universidad Politecnica de Madrid",
+    "country": "Spain",
+    "admission_page_url": "https://www.upm.es/internacional",
+    "program_level": "Masters",
+    "field": "Artificial Intelligence",
+    "manual_check_needed": false
+  },
+  {
+    "id": "barcelona-ds",
+    "name": "University of Barcelona",
+    "country": "Spain",
+    "admission_page_url": "https://www.ub.edu/web/ub/en/studies/official_master_s_degree/welcome.html",
+    "program_level": "Masters",
+    "field": "Data Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "mit-cs-phd",
+    "name": "MIT",
+    "country": "USA",
+    "admission_page_url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+    "program_level": "PhD",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "stanford-ai-phd",
+    "name": "Stanford University",
+    "country": "USA",
+    "admission_page_url": "https://cs.stanford.edu/admissions/graduate-admissions",
+    "program_level": "PhD",
+    "field": "Artificial Intelligence",
+    "manual_check_needed": false
+  },
+  {
+    "id": "cmu-ml",
+    "name": "Carnegie Mellon University",
+    "country": "USA",
+    "admission_page_url": "https://www.cmu.edu/scs/admissions/masters/",
+    "program_level": "Masters",
+    "field": "Machine Learning",
+    "manual_check_needed": false
+  },
+  {
+    "id": "melbourne-cs",
+    "name": "University of Melbourne",
+    "country": "Australia",
+    "admission_page_url": "https://study.unimelb.edu.au/find/courses/graduate/master-of-computer-science/",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "sydney-ds",
+    "name": "University of Sydney",
+    "country": "Australia",
+    "admission_page_url": "https://www.sydney.edu.au/courses/courses/pc/master-of-data-science.html",
+    "program_level": "Masters",
+    "field": "Data Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "anu-ai",
+    "name": "Australian National University (ANU)",
+    "country": "Australia",
+    "admission_page_url": "https://www.anu.edu.au/study/apply",
+    "program_level": "Masters",
+    "field": "Artificial Intelligence",
+    "manual_check_needed": false
+  },
+  {
+    "id": "auckland-cs",
+    "name": "University of Auckland",
+    "country": "New Zealand",
+    "admission_page_url": "https://www.auckland.ac.nz/en/study/study-options/find-a-study-option/master-of-science.html",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "kaist-cs",
+    "name": "KAIST",
+    "country": "South Korea",
+    "admission_page_url": "https://admission.kaist.ac.kr/intl-graduate/",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "snu-ai",
+    "name": "Seoul National University",
+    "country": "South Korea",
+    "admission_page_url": "https://admission.snu.ac.kr/graduate",
+    "program_level": "Masters",
+    "field": "Artificial Intelligence",
+    "manual_check_needed": false
+  },
+  {
+    "id": "postech-ds",
+    "name": "POSTECH",
+    "country": "South Korea",
+    "admission_page_url": "https://admission.postech.ac.kr/graduate/",
+    "program_level": "Masters",
+    "field": "Data Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "tokyo-cs",
+    "name": "University of Tokyo",
+    "country": "Japan",
+    "admission_page_url": "https://www.u-tokyo.ac.jp/en/prospective-students/graduate.html",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "osaka-ai",
+    "name": "Osaka University",
+    "country": "Japan",
+    "admission_page_url": "https://www.osaka-u.ac.jp/en/admissions/graduate",
+    "program_level": "Masters",
+    "field": "Artificial Intelligence",
+    "manual_check_needed": false
+  },
+  {
+    "id": "nus-cs",
+    "name": "National University of Singapore (NUS)",
+    "country": "Singapore",
+    "admission_page_url": "https://www.comp.nus.edu.sg/programmes/pg/",
+    "program_level": "Masters",
+    "field": "Computer Science",
+    "manual_check_needed": false
+  },
+  {
+    "id": "ntu-ai",
+    "name": "Nanyang Technological University (NTU)",
+    "country": "Singapore",
+    "admission_page_url": "https://www.ntu.edu.sg/admissions/graduate",
+    "program_level": "Masters",
+    "field": "Artificial Intelligence",
+    "manual_check_needed": false
   }
 ]
